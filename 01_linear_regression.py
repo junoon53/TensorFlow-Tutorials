@@ -19,7 +19,7 @@ y_model = model(X, w)
 
 cost = tf.square(Y - y_model) # use square error for cost function
 
-train_op = tf.train.GradientDescentOptimizer(0.01).minimize(cost) # construct an optimizer to minimize cost and fit line to my data
+train_op = tf.train.GradientDescentOptimizer(0.1003).minimize(cost) # construct an optimizer to minimize cost and fit line to my data
 
 
 # Launch the graph in a session
@@ -29,8 +29,9 @@ with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
 
     sess.run(w.assign(0.0))
 
-    for i in range(100):
-        for (x, y) in zip(trX, trY):
-            sess.run(train_op, feed_dict={X: x, Y: y})
+    # for i in range(1000):
+    for (x, y) in zip(trX, trY):
+        print(x,y)
+        sess.run(train_op, feed_dict={X: x, Y: y})
+        print(sess.run(w))  # It should be something around 2
 
-    print(sess.run(w))  # It should be something around 2
